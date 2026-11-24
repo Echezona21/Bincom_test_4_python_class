@@ -23,3 +23,28 @@ CREATE TABLE IF NOT EXISTS todos(
 connection.commit()
 
 print("Table Created Successfully")
+
+#Create a list of tasks to add to the database
+tasks = [
+    "Take Bincom Test",
+    "Revise PostgreSQL",
+    "Revise Python",
+    "Practice CRUD",
+    "Learn Functions",
+    "Study APIs",
+    "Revise Algorithms",
+    "Drink A Bottle of Beer",
+    "Search for Jobs",
+    "Cook Dinner"
+]
+#print("Adding 10 Tasks to the Database...")
+
+for input in tasks:
+    cursor.execute(
+        "INSERT INTO todos(task) VALUES(%s)",
+        (input,)
+    )
+
+connection.commit()
+
+print("10 Tasks Added Successfully")
