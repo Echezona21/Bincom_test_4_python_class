@@ -7,8 +7,8 @@ connection = psycopg2.connect(
     password="Nnaemezie21.",
     port="5432"
 )
+#print("Connected Successfully!")
 
-print("Connected Successfully!")
 #create a cursor object to interact with the database
 cursor = connection.cursor()
 #Create a table to store tasks
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS todos(
 
 connection.commit()
 
-print("Table Created Successfully")
+#print("Table Created Successfully")
 
 #Create a list of tasks to add to the database
 tasks = [
@@ -46,11 +46,30 @@ tasks = [
 #     )
 
 connection.commit()
-
-print("10 Tasks Added Successfully")
+#print("10 Tasks Added Successfully")
 
 #Read all tasks from the database
 cursor.execute("SELECT * FROM todos")
 tasks = cursor.fetchall()
 for task in tasks:
     print(task)
+
+#Update a task in the database
+cursor.execute("""
+UPDATE todos
+SET completed = TRUE
+WHERE id = %s
+""", (1,))
+
+connection.commit()
+
+#Delete a task from the database
+cursor.execute("""
+DELETE FROM todos
+WHERE id = %s
+""", (2,))
+connection.commit()
+
+#Close the cursor and connection
+cursor.close()
+connection.close()
