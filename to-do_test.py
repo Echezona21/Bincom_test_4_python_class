@@ -1,12 +1,25 @@
+from dotenv import load_dotenv
+import os
 import psycopg2
-#Connect to the PostgreSQL database
+
+load_dotenv()
+
 connection = psycopg2.connect(
     host="localhost",
     database="test_todos",
     user="postgres",
-    password="Nnaemezie21.",
+    password=os.getenv("DB_PASSWORD"),
     port="5432"
 )
+# import psycopg2
+# #Connect to the PostgreSQL database
+# connection = psycopg2.connect(
+#     host="localhost",
+#     database="test_todos",
+#     user="postgres",
+#     password="Nnaemezie21.",
+#     port="5432"
+# )
 #print("Connected Successfully!")
 
 #create a cursor object to interact with the database
@@ -59,9 +72,7 @@ def delete_task(task_id):
 
 
 def main():
-
     while True:
-
         print("\n===== MY TO-DO APPLICATION =====")
         print("1. Add a task")
         print("2. View all tasks")
