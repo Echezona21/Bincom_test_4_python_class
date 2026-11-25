@@ -15,7 +15,7 @@ cursor = connection.cursor()
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS todos(
     id SERIAL PRIMARY KEY,
-    task VARCHAR(100),
+    task VARCHAR(100) NOT NULL,
     completed BOOLEAN DEFAULT FALSE
 )
 """)
@@ -50,8 +50,8 @@ connection.commit()
 
 #Read all tasks from the database
 cursor.execute("SELECT * FROM todos")
-tasks = cursor.fetchall()
-for task in tasks:
+all_tasks = cursor.fetchall()
+for task in all_tasks:
     print(task)
 
 #Update a task in the database
