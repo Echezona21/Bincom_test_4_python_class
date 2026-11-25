@@ -39,11 +39,11 @@ tasks = [
 ]
 #print("Adding 10 Tasks to the Database...")
 
-# for task in tasks:
-#     cursor.execute(
-#         "INSERT INTO todos(task) VALUES(%s)",
-#         (task,)
-#     )
+for task in tasks:
+    cursor.execute(
+        "INSERT INTO todos(task) VALUES(%s)",
+        (task,)
+    )
 
 connection.commit()
 #print("10 Tasks Added Successfully")
