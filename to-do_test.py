@@ -11,15 +11,7 @@ connection = psycopg2.connect(
     password=os.getenv("DB_PASSWORD"),
     port="5432"
 )
-# import psycopg2
-# #Connect to the PostgreSQL database
-# connection = psycopg2.connect(
-#     host="localhost",
-#     database="test_todos",
-#     user="postgres",
-#     password="Nnaemezie21.",
-#     port="5432"
-# )
+
 #print("Connected Successfully!")
 
 #create a cursor object to interact with the database
@@ -63,14 +55,17 @@ def update_task(task_id):
 
 #Delete a task from the database
 def delete_task(task_id):
-    # Delete task from PostgreSQL
     cursor.execute("""
     DELETE FROM todos
     WHERE id = %s
     """, (task_id,))
+
+    print("Task ID entered:", task_id)
+    print("Rows deleted:", cursor.rowcount)
+
     connection.commit()
 
-
+#Function to display the main menu and handle user input
 def main():
     while True:
         print("\n===== MY TO-DO APPLICATION =====")
@@ -81,11 +76,11 @@ def main():
         print("5. Exit")
 
         choice = input("\nSelect an option: ")
-
+    #Conditional statements to handle user input
         if choice == "1":
             task = input("Enter your task: ")
             add_task(task)
-
+    #Conditional statements to handle user input
         elif choice == "2":
             tasks = view_tasks()
 
